@@ -1,0 +1,27 @@
+.cardSection {
+  display: grid;
+  width: 100%;
+  max-width: 1400px;
+  grid-template-columns: repeat(auto-fill,minmax(300px, 1fr));
+  justify-items: center;
+  margin: 0 auto;
+}
+
+.totalContainer{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 20px;
+  font-size: 30px;
+}
+.totalContainer > span {
+  padding-left: 10px;
+  font-weight: bold;
+}
+
+button:disabled{
+  border-color:rgba(187, 185, 185, 0.274);
+  filter: opacity(0.5);
+}
+
+

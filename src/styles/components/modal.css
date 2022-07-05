@@ -1,0 +1,75 @@
+.modalContainer{
+  background-color: hsla(240, 20%, 97%, 0.774);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  max-width: 400px;
+  min-height: 350px;
+  transform: translate(-50%,-50%);
+  display: grid;
+  grid-template-columns: 1fr;
+  color: hsl(225, 3%, 26%);
+  border-radius: 10px;
+  box-shadow: 0px 4px 17px -7px #9c9b9b;;
+  border: 1px solid #9c9b9b88;
+  padding: 10px;
+}
+.modalContainer > button {
+  background-color: #dc3545;
+  font-family: inherit;
+  font-size: 24px;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 5px;
+  border: none;
+  height: 42px;
+  width: 200px;
+  justify-self: center;
+  margin: 20px 0;
+}
+.modalContainer > button:hover{
+  cursor: pointer;
+  filter: brightness(1.5); 
+  box-shadow: 0px 1px 1px 1px #9e9e9e;
+}
+.modalContainer__btnContainer{
+  justify-self: flex-end;
+}
+.modalContainer__btnContainer button{
+  background-color: transparent;
+  border: none;
+  padding: 10px 10px;
+}
+.modalContainer__btnContainer svg{
+  width: 32px;
+}
+
+.modalContainer__editFields{
+  align-self: flex-start;
+  margin-top: 10%;
+}
+.modalContainer__editFields  label{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+}
+.modalContainer__editFields  label h3{
+  text-align: start;
+  width: 100%;
+  padding-left: 20px;
+}
+.modalContainer__editFields input {
+  width: 95%;
+  border: 1px solid hsl(225, 3%, 26%) ;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+
+.modalContainer__editFields input:focus{
+  outline: unset;
+  border: 1px solid rgb(23, 235, 69);
+}
