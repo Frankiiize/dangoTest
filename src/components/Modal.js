@@ -1,7 +1,7 @@
 import React from "react";
 import CloseIcon from '../assets/icons/CloseIcon.jsx'
 import '../styles/components/modal.css'
-const Modal = ({handleEdit, handleDelete, handleChangeTitle, edit, fontSize, handleTitleSize}) => {
+const Modal = ({handleEdit, title, handleDelete, handleChangeTitle, edit, fontSize, handleTitleSize}) => {
   return(
     <div className="modalContainer">
       <div className="modalContainer__btnContainer">
@@ -12,11 +12,21 @@ const Modal = ({handleEdit, handleDelete, handleChangeTitle, edit, fontSize, han
       <div className="modalContainer__editFields">
         <label htmlFor="editProducts">
           <h3>Edita el titulo</h3>
-          <input onChange={(ev) => handleChangeTitle(ev,edit.id)} type="text" name="editProducts" id="editProducts" />
+          <input 
+            className={title.error ? 'input-error' : undefined}
+            placeholder={edit.product.title} 
+            onChange={(ev) => handleChangeTitle(ev, edit.product)} 
+            type="text" name="editProducts" id="editProducts" 
+            />
+          {
+            !!title.error && (
+              <span className="text-error">{title.error}</span>
+            )
+          }
         </label>
         <label htmlFor="changeFontSize">
           <h3>Cambia el Tamaño del titulo</h3>
-          <input type="range" value={fontSize}  min="16" max="60" onChange={(ev) => handleTitleSize(ev)} name="changeFontSize" id="changeFontSize" />
+          <input type="range" value={fontSize}  min="16" max="40" onChange={(ev) => handleTitleSize(ev)} name="changeFontSize" id="changeFontSize" />
         </label>
       </div>
       <button onClick={(ev) => {

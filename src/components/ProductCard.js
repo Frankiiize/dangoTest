@@ -1,17 +1,26 @@
 import React from "react";
 import '../styles/components/productCard.css';
 import EditIcon from '../assets/icons/Edit.jsx';
-const ProductCard = ({id, fontSize, currentEdit, added, handleDeleteToCart, handleQuantity, handleAddToCart , quantity, img = null, title = 'no tittle', price = null, description = 'no description', handleEdit}) => {
+const ProductCard = ({product, id, fontSize, currentEdit, added, handleDeleteToCart, handleQuantity, handleAddToCart , quantity, img = null, title = 'no tittle', price = null, description = 'no description', handleEdit}) => {
   return(
     <div className="cardContainer">
       <button
         >
-          <EditIcon  onClick={(ev) => handleEdit(ev, id)} />
+          <EditIcon  onClick={(ev) => handleEdit(ev, product)} />
         </button>
       <div className="cardContainer__photo">
         <img src={`${img}`} alt="earphone photo"/>
       </div>
-      <h2 style={id === currentEdit ? { fontSize: `${fontSize}px` } : { fontSize: `${fontSize}px` } }>{title}</h2>
+      <h2 
+        className="cardContainer__title" 
+        style={id === currentEdit ? { fontSize: `${fontSize}px` } : { fontSize: `${fontSize}px` } }
+        >
+          {
+            title.length < 50 
+            ? ( title  )
+            : (<p className="text-error">{title.slice(0,49)}</p>)
+          }
+       </h2>
       <div className="cardContainer__price">
         <span>${price}</span> 
         <div className="cardContainer__quantity">
@@ -43,7 +52,7 @@ const ProductCard = ({id, fontSize, currentEdit, added, handleDeleteToCart, hand
                 : 'Delete added item'
             }
         </button>
-        <a>Learn More</a>
+        <a href="https://drive.google.com/drive/u/0/folders/1Y0HEhGOQX3iYLkSUAHExU-Fj8XtYkbYW" target="_blank">Learn More</a>
       </div>
     </div>
   );

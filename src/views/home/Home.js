@@ -7,23 +7,23 @@ const Home = () => {
   const [ cardState, setCardState ] = useState(cards);
   const [edit, setEdit ] = useState({
     show: false,
-    id: null,
+    product: null,
   });
-  const [ title, setTitle ] = useState('');
+  const [ title, setTitle ] = useState({title: '', error: false});
   const [ fontSize, setFontSize ] = useState(25);
   const [ quantity , setQuantity ] = useState(1);
   const [ cartItems, setCartItems ] = useState({cart:[]});
-  const handleEdit = (ev,id) => {
+  const handleEdit = (ev, product) => {
     ev.stopPropagation();
     if(!edit.show){
       setEdit({
         show: !edit.show,
-        id: id,
+        product: product,
       });
     } else {
       setEdit({
         show: false,
-        id: null,
+        product: null,
       }) 
     }
   }
@@ -33,14 +33,23 @@ const Home = () => {
     return sum;
   }
   
-  const handleChangeTitle = (ev, id) => {
-    const index = cardState.findIndex((item) => item.id === id);
-    setTitle(ev.target.value);
-    cardState[index].title = ev.target.value
+  const handleChangeTitle = (ev, product) => {
+    const index = cardState.findIndex((item) => item.id === product.id);
+    if(product.title.length > 50) {
+      setTitle({error: 'no puedes superar los 50 caracteres'});
+      cardState[index].title = ev.target.value;
+    }else {
+      setTitle({title:ev.target.value});
+      cardState[index].title = ev.target.value;
+    }
   }
 
+  useEffect(() => {
+    setTitle({...title, error:false})
+  },[edit.product])
+
   const handleTitleSize = (ev) => {
-    const index = cardState.findIndex((item) => item.id === edit.id);
+    const index = cardState.findIndex((item) => item.id === edit.product.id);
     cardState[index].fontSize = ev.target.value;
     setFontSize(ev.target.value)
   }
@@ -58,7 +67,7 @@ const Home = () => {
     }
   }
   const handleDelete = () => {
-    const stayItems = cardState.filter((item) => item.id !== edit.id)
+    const stayItems = cardState.filter((item) => item.id !== edit.product.id)
     setCardState(stayItems)
   }
   const handleAddToCart = (id) => {
@@ -99,6 +108,7 @@ const Home = () => {
             handleAddToCart={handleAddToCart}
             handleDeleteToCart={handleDeleteToCart}
             added={item.added}
+            product={item}
           />
         ))
       }
@@ -116,6 +126,7 @@ const Home = () => {
         fontSize={fontSize}
         handleTitleSize={handleTitleSize}
         handleDelete={handleDelete}
+        title={title}
         />
       )
     }
